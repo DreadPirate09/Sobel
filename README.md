@@ -6,4 +6,4 @@ edge detection +  color by the gradient angle
 
 
 #w/ cadran
-<img src="https://github.com/DreadPirate09/Sobel/blob/main/cadran.PNG">
+<img src="https://github.com/DreadPirate09/Sobel/blob/main/cadran2.PNG">
