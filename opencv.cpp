@@ -97,7 +97,28 @@ void Sobelfilter(cv::Mat& src) {//sobel filtering
 
 				dx2 = dx;
 				dy2 = dy;
-				angle = atan(abs(dx)/abs(dy))*720/PI;   // calculate the angle
+
+				if (dx > 0 && dy > 0) {
+					angle = atan(dy /dx - PI) * 540 / PI;   // calculate the angle
+					angle = abs(angle);
+					//angle = 360 - angle;  <- for inverting the color
+				}else if(dx < 0 && dy > 0) {
+					angle = (atan(dy / dx)) * 720 / PI;   // calculate the angle
+					angle = abs(angle);
+					//angle = 360 - angle;
+				}else if (dx < 0 && dy < 0) {
+					angle = (atan((dy) / (dx))+PI) * 180 / PI;   // calculate the angle
+					angle = abs(angle);
+					//angle = 360 - angle;
+				}
+				else {
+					angle = atan((dy) / (dx)) * 360 / PI;   // calculate the angle
+					angle = abs(angle);
+					//angle = 360 - angle;
+				}
+
+				//cout << angle << endl;
+
 				v = abs(dx) + abs(dy); 
 
 
@@ -126,7 +147,7 @@ void Sobelfilter(cv::Mat& src) {//sobel filtering
 
 int main(int argc, char** argv) {
 	cv::Mat src, gray;
-	src = cv::imread("C:/Users/georg/source/repos/Sobel3/opencv/baloon2.jpg");  //read the image into the Mat src
+	src = cv::imread("C:/Users/georg/OneDrive/Desktop/circle.jpg");  //read the image into the Mat src
 
 	gray = BGR2GRAY(src);  //convert the image to grayscale
 
